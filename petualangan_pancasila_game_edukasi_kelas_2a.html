@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petualangan Pancasila - Pendidikan Pancasila Kelas 2A</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Fredoka & Lexend for fun child-friendly typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandRed: '#EF4444',
+                        brandYellow: '#F59E0B',
+                        brandGreen: '#10B981',
+                        brandBlue: '#3B82F6',
+                        brandPurple: '#8B5CF6',
+                        bgWarm: '#FFFBEB',
+                    },
+                    fontFamily: {
+                        fredoka: ['Fredoka', 'sans-serif'],
+                        lexend: ['Lexend', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Lexend', sans-serif;
+            background-color: #FEF3C7;
+            background-image: radial-gradient(#FDE68A 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        h1, h2, h3, h4, .font-heading {
+            font-family: 'Fredoka', cursive;
+        }
+        .btn-bounce {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .btn-bounce:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.2);
+        }
+        .btn-bounce:active {
+            transform: translateY(1px) scale(0.98);
+        }
+        .card-shadow {
+            box-shadow: 0 8px 0px 0px rgba(0,0,0,0.15);
+        }
+        .card-shadow-sm {
+            box-shadow: 0 4px 0px 0px rgba(0,0,0,0.12);
+        }
+        .glow-gold {
+            box-shadow: 0 0 25px rgba(245, 158, 11, 0.6);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FEF3C7;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #F59E0B;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body class="min-h-screen text-slate-800 flex flex-col justify-between antialiased">
+
+    <!-- Header Navigation -->
+    <header class="bg-white border-b-4 border-amber-400 sticky top-0 z-50 shadow-md">
+        <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="showScreen('screen-home')">
+                <div class="w-10 h-10 rounded-full bg-red-500 flex items-center justify-center text-white text-xl font-bold shadow">
+                    🇮🇩
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold text-amber-600 leading-none">PETUALANGAN PANCASILA</h1>
+                    <p class="text-xs text-slate-500 font-medium">Pendidikan Pancasila Kelas 2A</p>
+                </div>
+            </div>
+            <div id="player-badge" class="hidden bg-amber-100 border-2 border-amber-400 px-3 py-1 rounded-full text-sm font-bold text-amber-800 flex items-center gap-2">
+                <i class="fa-solid fa-user-astronaut text-amber-600"></i>
+                <span id="display-player-name">Pemain</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-6 flex-grow w-full">
+
+        <!-- ========================================== -->
+        <!-- 1. HALAMAN BERANDA / WELCOME SCREEN -->
+        <!-- ========================================== -->
+        <section id="screen-home" class="screen flex flex-col items-center text-center">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border-4 border-amber-300 card-shadow w-full max-w-2xl relative overflow-hidden">
+                <!-- Decorative Icons Background -->
+                <div class="absolute top-2 left-2 text-3xl opacity-20">⭐</div>
+                <div class="absolute top-4 right-4 text-3xl opacity-20">📚</div>
+                <div class="absolute bottom-4 left-4 text-3xl opacity-20">🏠</div>
+                <div class="absolute bottom-2 right-2 text-3xl opacity-20">🏆</div>
+
+                <div class="inline-block bg-red-100 text-red-600 px-4 py-1.5 rounded-full font-bold text-sm mb-3">
+                    🇮🇩 Pendidikan Pancasila Kelas 2A
+                </div>
+
+                <h1 class="text-3xl sm:text-5xl font-black text-slate-800 mb-2">
+                    🎮 PETUALANGAN <span class="text-red-500">PANCASILA</span>
+                </h1>
+                <p class="text-slate-600 text-base sm:text-lg mb-6">
+                    Mari belajar menjadi anak yang patuh aturan dan berperilaku sesuai nilai-nilai Pancasila!
+                </p>
+
+                <!-- Graphic Illustrations Grid -->
+                <div class="grid grid-cols-4 sm:grid-cols-6 gap-3 mb-6 bg-amber-50 p-4 rounded-2xl border-2 border-amber-200">
+                    <div class="flex flex-col items-center"><span class="text-3xl">🦅</span><span class="text-[10px] font-bold mt-1">Garuda</span></div>
+                    <div class="flex flex-col items-center"><span class="text-3xl">⭐</span><span class="text-[10px] font-bold mt-1">Bintang</span></div>
+                    <div class="flex flex-col items-center"><span class="text-3xl">📚</span><span class="text-[10px] font-bold mt-1">Buku</span></div>
+                    <div class="flex flex-col items-center"><span class="text-3xl">✏️</span><span class="text-[10px] font-bold mt-1">Pensil</span></div>
+                    <div class="flex flex-col items-center"><span class="text-3xl">🏠</span><span class="text-[10px] font-bold mt-1">Rumah</span></div>
+                    <div class="flex flex-col items-center"><span class="text-3xl">🏆</span><span class="text-[10px] font-bold mt-1">Piala</span></div>
+                </div>
+
+                <!-- Input Player Name Form -->
+                <div class="bg-amber-100 p-5 rounded-2xl border-2 border-amber-300 mb-6">
+                    <label for="input-name" class="block font-bold text-slate-700 text-lg mb-2">
+                        ✍️ Masukkan Nama Kamu:
+                    </label>
+                    <input type="text" id="input-name" placeholder="Ketik nama kamu di sini..." 
+                        class="w-full text-center px-4 py-3 rounded-xl border-2 border-amber-400 font-bold text-xl text-slate-800 focus:outline-none focus:ring-4 focus:ring-amber-300 bg-white">
+                    <p id="name-error" class="text-red-500 text-sm font-bold mt-2 hidden">⚠️ Harap masukkan nama kamu terlebih dahulu ya!</p>
+                </div>
+
+                <!-- Welcome Greeting (Hidden initially) -->
+                <div id="greeting-box" class="hidden bg-green-100 border-2 border-green-400 p-4 rounded-2xl mb-6">
+                    <h3 class="text-xl font-bold text-green-800">Halo, <span id="greet-name" class="underline"></span>! 👋</h3>
+                    <p class="text-green-700 text-sm mt-1">Selamat datang di Petualangan Pancasila!</p>
+                    <p class="text-green-800 font-semibold text-sm mt-1">Siap belajar menjadi anak yang patuh aturan dan berperilaku mulia?</p>
+                </div>
+
+                <button id="btn-start" onclick="submitName()" class="w-full bg-gradient-to-r from-emerald-500 to-green-600 text-white font-black text-xl sm:text-2xl py-4 rounded-2xl card-shadow btn-bounce border-2 border-green-700 flex items-center justify-center gap-3">
+                    🚀 MULAI PETUALANGAN
+                </button>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 2. HALAMAN CARA BERMAIN -->
+        <!-- ========================================== -->
+        <section id="screen-howto" class="screen hidden">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border-4 border-amber-300 card-shadow max-w-2xl mx-auto">
+                <div class="text-center mb-6">
+                    <span class="text-4xl">📚</span>
+                    <h2 class="text-3xl font-bold text-amber-600 mt-2">CARA BERMAIN</h2>
+                    <p class="text-slate-500 text-sm">Ikuti petunjuk ini agar kamu bisa menjadi Juara Pancasila!</p>
+                </div>
+
+                <ol class="space-y-3 bg-amber-50 p-5 rounded-2xl border-2 border-amber-200 text-slate-700 font-medium text-sm sm:text-base list-decimal list-inside">
+                    <li class="pl-2">Masukkan nama kamu.</li>
+                    <li class="pl-2">Pelajari materi dengan baik.</li>
+                    <li class="pl-2">Baca contoh yang diberikan.</li>
+                    <li class="pl-2">Setelah selesai belajar, kamu dapat mengikuti kuis.</li>
+                    <li class="pl-2">Pilih satu jawaban yang paling tepat.</li>
+                    <li class="pl-2">Setelah menjawab, kamu akan mengetahui hasil jawabanmu.</li>
+                    <li class="pl-2">Pelajari pembahasannya.</li>
+                    <li class="pl-2">Selesaikan semua kuis (50 Soal).</li>
+                    <li class="pl-2">Kumpulkan poin sebanyak-banyaknya (Maksimal 1000 Poin).</li>
+                    <li class="pl-2">Setelah selesai, lihat hasil dan sertifikatmu.</li>
+                </ol>
+
+                <button onclick="goToStageMap()" class="mt-6 w-full bg-blue-500 hover:bg-blue-600 text-white font-bold text-xl py-3.5 rounded-2xl card-shadow btn-bounce border-2 border-blue-700 flex items-center justify-center gap-2">
+                    ▶ MULAI BELAJAR
+                </button>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 3. PETA PETUALANGAN (STAGE MAP) -->
+        <!-- ========================================== -->
+        <section id="screen-map" class="screen hidden">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border-4 border-amber-300 card-shadow max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl font-black text-slate-800 mb-2">🗺️ PETA PETUALANGAN</h2>
+                <p class="text-slate-600 mb-6">Pilih Tahap Petualangan Kamu, <span class="font-bold text-amber-600 player-name-text">Anak Hebat</span>!</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Stage 1 -->
+                    <div class="bg-amber-50 border-3 border-amber-300 rounded-2xl p-5 flex flex-col justify-between items-center text-center relative overflow-hidden">
+                        <div class="bg-amber-400 text-slate-900 font-bold px-3 py-1 rounded-full text-xs uppercase tracking-wider mb-2">Tahap 1</div>
+                        <span class="text-5xl mb-2">🏠</span>
+                        <h3 class="text-xl font-bold text-slate-800">Petualangan di Rumah</h3>
+                        <p class="text-xs text-slate-600 mt-1 mb-4">Bab 1 – Aku Patuh Aturan</p>
+                        
+                        <div class="w-full space-y-2">
+                            <button onclick="startLesson(1)" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-2.5 rounded-xl border-2 border-amber-700 card-shadow-sm btn-bounce text-sm flex items-center justify-center gap-2">
+                                📖 Pelajari Materi Bab 1
+                            </button>
+                            <button id="btn-quiz1-lock" onclick="startQuiz(1)" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2.5 rounded-xl border-2 border-red-700 card-shadow-sm btn-bounce text-sm flex items-center justify-center gap-2">
+                                📝 Kuis Bab 1 (25 Soal)
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Stage 2 -->
+                    <div class="bg-red-50 border-3 border-red-300 rounded-2xl p-5 flex flex-col justify-between items-center text-center relative overflow-hidden">
+                        <div class="bg-red-400 text-white font-bold px-3 py-1 rounded-full text-xs uppercase tracking-wider mb-2">Tahap 2</div>
+                        <span class="text-5xl mb-2">🇮🇩</span>
+                        <h3 class="text-xl font-bold text-slate-800">Petualangan Pancasila</h3>
+                        <p class="text-xs text-slate-600 mt-1 mb-4">Bab 2 – Aku Berperilaku Pancasila</p>
+
+                        <div class="w-full space-y-2">
+                            <button onclick="startLesson(2)" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-2.5 rounded-xl border-2 border-amber-700 card-shadow-sm btn-bounce text-sm flex items-center justify-center gap-2">
+                                📖 Pelajari Materi Bab 2
+                            </button>
+                            <button id="btn-quiz2-lock" onclick="startQuiz(2)" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2.5 rounded-xl border-2 border-red-700 card-shadow-sm btn-bounce text-sm flex items-center justify-center gap-2">
+                                📝 Kuis Bab 2 (25 Soal)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 bg-blue-50 border-2 border-blue-200 p-4 rounded-2xl flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <span class="text-3xl">🏆</span>
+                        <div class="text-left">
+                            <p class="text-xs font-bold text-blue-600">STATUS PETUALANGAN</p>
+                            <p class="text-sm font-bold text-slate-800">Total Poin Saat Ini: <span id="map-score" class="text-amber-600 font-extrabold text-lg">0</span> / 1000</p>
+                        </div>
+                    </div>
+                    <button onclick="showScreen('screen-home')" class="text-xs font-bold text-slate-500 hover:text-slate-800 underline">
+                        Ganti Nama
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 4. MATERI BAB 1 - AKU PATUH ATURAN -->
+        <!-- ========================================== -->
+        <section id="screen-lesson-1" class="screen hidden">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border-4 border-amber-300 card-shadow max-w-3xl mx-auto">
+                <div class="flex items-center justify-between border-b-2 border-slate-100 pb-4 mb-6">
+                    <div>
+                        <span class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full">BAB 1</span>
+                        <h2 class="text-2xl sm:text-3xl font-black text-slate-800 mt-1">🏠 AKU PATUH ATURAN</h2>
+                    </div>
+                    <button onclick="speakText('Materi Bab 1. Aku Patuh Aturan.')" class="bg-amber-100 hover:bg-amber-200 p-3 rounded-full text-amber-700">
+                        <i class="fa-solid fa-volume-high text-xl"></i>
+                    </button>
+                </div>
+
+                <!-- Tab Sub-Materi -->
+                <div class="flex gap-2 overflow-x-auto pb-2 mb-6 scrollbar-none">
+                    <button id="tab-b1-a" onclick="showSubLesson('b1', 'a')" class="tab-btn-b1 bg-amber-500 text-white font-bold px-4 py-2 rounded-xl text-sm whitespace-nowrap">
+                        A. Aturan di Keluargaku
+                    </button>
+                    <button id="tab-b1-b" onclick="showSubLesson('b1', 'b')" class="tab-btn-b1 bg-slate-100 text-slate-600 font-bold px-4 py-2 rounded-xl text-sm whitespace-nowrap">
+                        B. Sikap Mematuhi Aturan
+                    </button>
+                    <button id="tab-b1-c" onclick="showSubLesson('b1', 'c')" class="tab-btn-b1 bg-slate-100 text-slate-600 font-bold px-4 py-2 rounded-xl text-sm whitespace-nowrap">
+                        C. Cerita Patuh Aturan
+                    </button>
+                </div>
+
+                <!-- SUB LESSON A -->
+                <div id="content-b1-a" class="sublesson-b1 space-y-4">
+                    <div class="bg-amber-50 p-4 rounded-2xl border-2 border-amber-200">
+                        <h3 class="font-bold text-amber-800 text-lg mb-2">📌 Apa itu Aturan di Rumah?</h3>
+                        <p class="text-slate-700 text-sm sm:text-base leading-relaxed">
+                            <strong>Aturan</strong> adalah petunjuk atau tindakan yang harus dilakukan agar kehidupan di rumah menjadi aman, tertib, dan damai. Setiap keluarga memiliki aturan yang dibuat untuk kebaikan bersama.
+                        </p>
+                    </div>
+
+                    <div class="bg-blue-50 p-4 rounded-2xl border-2 border-blue-200">
+                        <h3 class="font-bold text-blue-800 text-lg mb-2">🏠 Contoh Aturan di Rumah:</h3>
+                        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-slate-700 font-medium">
+                            <li class="bg-white p-2.5 rounded-xl border border-blue-100 flex items-center gap-2">
+                                <span>⏰</span> Bangun tidur tepat waktu
+                            </li>
+                            <li class="bg-white p-2.5 rounded-xl border border-blue-100 flex items-center gap-2">
+                                <span>🛏️</span> Merapikan tempat tidur
+                            </li>
+                            <li class="bg-white p-2.5 rounded-xl border border-blue-100 flex items-center gap-2">
+                                <span>🧼</span> Menjaga kebersihan diri & rumah
+                            </li>
+                            <li class="bg-white p-2.5 rounded-xl border border-blue-100 flex items-center gap-2">
+                                <span>🍽️</span> Berdoa sebelum dan sesudah makan
+                            </li>
+                            <li class="bg-white p-2.5 rounded-xl border border-blue-100 flex items-center gap-2">
+                                <span>📖</span> Belajar sesuai jadwal
+                            </li>
+                            <li class="bg-white p-2.5 rounded-xl border border-blue-100 flex items-center gap-2">
+                                <span>🧸</span> Merapikan mainan setelah bermain
+                            </li>
+                            <li class="bg-white p-2.5 rounded-xl border border-blue-100 flex items-center gap-2">
+                                <span>🗣️</span> Berbicara dengan sopan dan ramah
+                            </li>
+                            <li class="bg-white p-2.5 rounded-xl border border-blue-100 flex items-center gap-2">
+                                <span>👋</span> Meminta izin saat hendak bepergian
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Mini Interactive Quiz -->
+                    <div class="bg-emerald-50 p-4 rounded-2xl border-2 border-emerald-300">
+                        <h4 class="font-bold text-emerald-800 text-sm mb-2">🎮 Mini Aktivitas: Manakah yang merupakan Aturan di Rumah?</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            <button onclick="checkMiniActivity(this, true, 'Ya! Merapikan tempat tidur adalah aturan rumah.')" class="bg-white hover:bg-emerald-100 p-3 rounded-xl border-2 border-emerald-200 text-left font-semibold text-sm text-slate-700">
+                                🛏️ Merapikan tempat tidur sendiri
+                            </button>
+                            <button onclick="checkMiniActivity(this, false, 'Kurang tepat! Membuang sampah sembarangan merusak kebersihan.')" class="bg-white hover:bg-red-100 p-3 rounded-xl border-2 border-slate-200 text-left font-semibold text-sm text-slate-700">
+                                🗑️ Membuang sampah di lantai kamar
+                            </button>
+                        </div>
+                        <p class="mini-feedback hidden font-bold text-xs mt-2"></p>
+                    </div>
+                </div>
+
+                <!-- SUB LESSON B -->
+                <div id="content-b1-b" class="sublesson-b1 hidden space-y-4">
+                    <div class="bg-purple-50 p-4 rounded-2xl border-2 border-purple-200">
+                        <h3 class="font-bold text-purple-800 text-lg mb-2">💡 Sikap Mematuhi Aturan</h3>
+                        <p class="text-slate-700 text-sm sm:text-base leading-relaxed mb-3">
+                            Mematuhi aturan berarti melaksanakannya dengan penuh <strong>disiplin</strong> dan <strong>tanggung jawab</strong> tanpa harus dipaksa.
+                        </p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm">
+                            <div class="bg-white p-3 rounded-xl border border-purple-200">
+                                <span class="font-bold text-green-600">✅ Manfaat Patuh Aturan:</span>
+                                <ul class="list-disc list-inside mt-1 space-y-1 text-slate-600">
+                                    <li>Rumah menjadi bersih & rapi</li>
+                                    <li>Suasana keluarga harmonis</li>
+                                    <li>Disukai orang tua & saudara</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white p-3 rounded-xl border border-purple-200">
+                                <span class="font-bold text-red-600">❌ Akibat Tidak Patuh Aturan:</span>
+                                <ul class="list-disc list-inside mt-1 space-y-1 text-slate-600">
+                                    <li>Rumah menjadi berantakan</li>
+                                    <li>Bisa terjadi pertengkaran</li>
+                                    <li>Teguran dari orang tua</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-amber-50 p-4 rounded-2xl border-2 border-amber-300">
+                        <h4 class="font-bold text-amber-800 text-sm mb-2">🔍 Mari Amati Situasi:</h4>
+                        <p class="text-sm text-slate-700 italic bg-white p-3 rounded-xl border border-amber-200 mb-2">
+                            "Setelah selesai bermain balok susun di ruang tamu, Raka langsung memasukkan semua balok ke dalam wadah mainan dan mengembalikannya ke rak."
+                        </p>
+                        <p class="font-bold text-slate-800 text-sm mb-2">Apakah Raka sudah mematuhi aturan?</p>
+                        <div class="flex gap-3">
+                            <button onclick="checkMiniActivity(this, true, 'Hebat! Raka anak yang bertanggung jawab mematuhi aturan rumah.')" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-xl font-bold text-sm">
+                                ✅ Ya, Sudah Patuh!
+                            </button>
+                            <button onclick="checkMiniActivity(this, false, 'Coba dipikirkan lagi ya!')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 px-4 py-2 rounded-xl font-bold text-sm">
+                                ❌ Belum Patuh
+                            </button>
+                        </div>
+                        <p class="mini-feedback hidden font-bold text-xs mt-2"></p>
+                    </div>
+                </div>
+
+                <!-- SUB LESSON C -->
+                <div id="content-b1-c" class="sublesson-b1 hidden space-y-4">
+                    <div class="bg-rose-50 p-5 rounded-2xl border-2 border-rose-200">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="text-4xl">👦</span>
+                            <div>
+                                <h3 class="font-bold text-rose-800 text-lg">Cerita Anak Patuh: "Gaga Anak Disiplin"</h3>
+                                <p class="text-xs text-rose-600">Siswa Kelas 2 SD</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-700 text-sm sm:text-base leading-relaxed bg-white p-4 rounded-xl border border-rose-100">
+                            Setiap pagi jam 05.00, alarm jam dinding berbunyi. <strong>Gaga</strong> langsung bangun dan segera merapikan tempat tidurnya. Setelah mandi dan sarapan, Gaga meminta izin dan mencium tangan ayah dan ibu sebelum berangkat sekolah.<br><br>
+                            Pulang sekolah, Gaga menaruh sepatu di rak sepatu. Sore hari setelah selesai bermain, Gaga selalu merapikan mainannya sendiri. Malam hari, Gaga belajar sesuai jadwal tanpa perlu disuruh ibu.
+                        </p>
+                    </div>
+
+                    <div class="bg-amber-100 p-4 rounded-2xl border-2 border-amber-300">
+                        <h4 class="font-bold text-amber-900 text-sm mb-2">❓ Pelajaran apa yang dapat kita ambil dari cerita Gaga?</h4>
+                        <div class="space-y-2">
+                            <button onclick="checkMiniActivity(this, true, 'Tepat sekali! Meneladani Gaga membuat kita menjadi anak hebat.')" class="w-full text-left bg-white p-3 rounded-xl border border-amber-300 font-semibold text-sm text-slate-700 hover:bg-amber-50">
+                                🌟 Menjadi anak yang selalu disiplin dan patuh pada aturan di rumah.
+                            </button>
+                            <button onclick="checkMiniActivity(this, false, 'Bukan ya, kita harus merapikan mainan kita sendiri.')" class="w-full text-left bg-white p-3 rounded-xl border border-amber-300 font-semibold text-sm text-slate-700 hover:bg-amber-50">
+                                🙈 Membiarkan orang tua merapikan mainan kita.
+                            </button>
+                        </div>
+                        <p class="mini-feedback hidden font-bold text-xs mt-2"></p>
+                    </div>
+                </div>
+
+                <!-- Footer Navigation Buttons -->
+                <div class="mt-8 pt-4 border-t-2 border-slate-100 flex flex-wrap gap-3 justify-between">
+                    <button onclick="goToStageMap()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-4 py-2.5 rounded-xl text-sm">
+                        🗺️ Peta Petualangan
+                    </button>
+                    <div class="flex gap-2">
+                        <button onclick="startLesson(1)" class="bg-amber-100 hover:bg-amber-200 text-amber-800 font-bold px-4 py-2.5 rounded-xl text-sm">
+                            📖 ULANGI MATERI
+                        </button>
+                        <button onclick="startQuiz(1)" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-5 py-2.5 rounded-xl text-sm border-2 border-emerald-700 card-shadow-sm btn-bounce">
+                            📝 MULAI KUIS BAB 1
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 5. MATERI BAB 2 - AKU BERPERILAKU PANCASILA -->
+        <!-- ========================================== -->
+        <section id="screen-lesson-2" class="screen hidden">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border-4 border-amber-300 card-shadow max-w-3xl mx-auto">
+                <div class="flex items-center justify-between border-b-2 border-slate-100 pb-4 mb-6">
+                    <div>
+                        <span class="bg-red-100 text-red-800 text-xs font-bold px-3 py-1 rounded-full">BAB 2</span>
+                        <h2 class="text-2xl sm:text-3xl font-black text-slate-800 mt-1">🇮🇩 AKU BERPERILAKU PANCASILA</h2>
+                    </div>
+                    <button onclick="speakText('Materi Bab 2. Aku Berperilaku Pancasila.')" class="bg-amber-100 hover:bg-amber-200 p-3 rounded-full text-amber-700">
+                        <i class="fa-solid fa-volume-high text-xl"></i>
+                    </button>
+                </div>
+
+                <!-- Tab Sub-Materi -->
+                <div class="flex gap-2 overflow-x-auto pb-2 mb-6 scrollbar-none">
+                    <button id="tab-b2-a" onclick="showSubLesson('b2', 'a')" class="tab-btn-b2 bg-red-500 text-white font-bold px-3 py-1.5 rounded-xl text-xs sm:text-sm whitespace-nowrap">
+                        A. Lambang Pancasila
+                    </button>
+                    <button id="tab-b2-b" onclick="showSubLesson('b2', 'b')" class="tab-btn-b2 bg-slate-100 text-slate-600 font-bold px-3 py-1.5 rounded-xl text-xs sm:text-sm whitespace-nowrap">
+                        B. Sila-Sila
+                    </button>
+                    <button id="tab-b2-c" onclick="showSubLesson('b2', 'c')" class="tab-btn-b2 bg-slate-100 text-slate-600 font-bold px-3 py-1.5 rounded-xl text-xs sm:text-sm whitespace-nowrap">
+                        C. Arti Lambang
+                    </button>
+                    <button id="tab-b2-d" onclick="showSubLesson('b2', 'd')" class="tab-btn-b2 bg-slate-100 text-slate-600 font-bold px-3 py-1.5 rounded-xl text-xs sm:text-sm whitespace-nowrap">
+                        D. Penerapan di Rumah
+                    </button>
+                    <button id="tab-b2-e" onclick="showSubLesson('b2', 'e')" class="tab-btn-b2 bg-slate-100 text-slate-600 font-bold px-3 py-1.5 rounded-xl text-xs sm:text-sm whitespace-nowrap">
+                        E. Perumus
+                    </button>
+                    <button id="tab-b2-f" onclick="showSubLesson('b2', 'f')" class="tab-btn-b2 bg-slate-100 text-slate-600 font-bold px-3 py-1.5 rounded-xl text-xs sm:text-sm whitespace-nowrap">
+                        F. Pahlawan
+                    </button>
+                </div>
+
+                <!-- SUB LESSON A -->
+                <div id="content-b2-a" class="sublesson-b2 space-y-4">
+                    <p class="text-slate-700 text-sm">
+                        Garuda Pancasila adalah lambang negara Indonesia. Di dadanya terdapat perisai berisi 5 simbol sila Pancasila:
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-5 gap-3">
+                        <div class="bg-amber-50 border-2 border-amber-300 p-3 rounded-2xl text-center">
+                            <span class="text-4xl block mb-1">⭐</span>
+                            <span class="text-xs font-bold text-amber-900 block">Sila 1</span>
+                            <span class="text-[11px] text-slate-600 font-medium">Bintang</span>
+                        </div>
+                        <div class="bg-amber-50 border-2 border-amber-300 p-3 rounded-2xl text-center">
+                            <span class="text-4xl block mb-1">⛓️</span>
+                            <span class="text-xs font-bold text-amber-900 block">Sila 2</span>
+                            <span class="text-[11px] text-slate-600 font-medium">Rantai</span>
+                        </div>
+                        <div class="bg-amber-50 border-2 border-amber-300 p-3 rounded-2xl text-center">
+                            <span class="text-4xl block mb-1">🌳</span>
+                            <span class="text-xs font-bold text-amber-900 block">Sila 3</span>
+                            <span class="text-[11px] text-slate-600 font-medium">Pohon Beringin</span>
+                        </div>
+                        <div class="bg-amber-50 border-2 border-amber-300 p-3 rounded-2xl text-center">
+                            <span class="text-4xl block mb-1">🐂</span>
+                            <span class="text-xs font-bold text-amber-900 block">Sila 4</span>
+                            <span class="text-[11px] text-slate-600 font-medium">Kepala Banteng</span>
+                        </div>
+                        <div class="bg-amber-50 border-2 border-amber-300 p-3 rounded-2xl text-center">
+                            <span class="text-4xl block mb-1">🌾</span>
+                            <span class="text-xs font-bold text-amber-900 block">Sila 5</span>
+                            <span class="text-[11px] text-slate-600 font-medium">Padi dan Kapas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SUB LESSON B -->
+                <div id="content-b2-b" class="sublesson-b2 hidden space-y-3">
+                    <h3 class="font-bold text-slate-800 text-base mb-2">📜 Teks Lima Sila Pancasila:</h3>
+
+                    <div class="bg-amber-50 p-3 rounded-xl border border-amber-300 flex items-center gap-3">
+                        <span class="text-2xl">⭐</span>
+                        <div>
+                            <span class="font-bold text-xs text-amber-800 block">Sila Ke-1</span>
+                            <p class="font-bold text-sm text-slate-800">Ketuhanan Yang Maha Esa</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-red-50 p-3 rounded-xl border border-red-300 flex items-center gap-3">
+                        <span class="text-2xl">⛓️</span>
+                        <div>
+                            <span class="font-bold text-xs text-red-800 block">Sila Ke-2</span>
+                            <p class="font-bold text-sm text-slate-800">Kemanusiaan yang Adil dan Beradab</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-green-50 p-3 rounded-xl border border-green-300 flex items-center gap-3">
+                        <span class="text-2xl">🌳</span>
+                        <div>
+                            <span class="font-bold text-xs text-green-800 block">Sila Ke-3</span>
+                            <p class="font-bold text-sm text-slate-800">Persatuan Indonesia</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-purple-50 p-3 rounded-xl border border-purple-300 flex items-center gap-3">
+                        <span class="text-2xl">🐂</span>
+                        <div>
+                            <span class="font-bold text-xs text-purple-800 block">Sila Ke-4</span>
+                            <p class="font-bold text-sm text-slate-800">Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan dalam Permusyawaratan/Perwakilan</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-blue-50 p-3 rounded-xl border border-blue-300 flex items-center gap-3">
+                        <span class="text-2xl">🌾</span>
+                        <div>
+                            <span class="font-bold text-xs text-blue-800 block">Sila Ke-5</span>
+                            <p class="font-bold text-sm text-slate-800">Keadilan Sosial bagi Seluruh Rakyat Indonesia</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SUB LESSON C -->
+                <div id="content-b2-c" class="sublesson-b2 hidden space-y-3">
+                    <h3 class="font-bold text-slate-800 text-base">✨ Arti & Makna Sederhana Lambang:</h3>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                        <div class="bg-amber-50 p-3 rounded-xl border border-amber-200">
+                            <span class="font-bold text-amber-800">⭐ Bintang:</span>
+                            <p class="text-slate-600 text-xs mt-1">Menggambarkan ketuhanan dan cahaya spiritual bagi bangsa.</p>
+                        </div>
+                        <div class="bg-red-50 p-3 rounded-xl border border-red-200">
+                            <span class="font-bold text-red-800">⛓️ Rantai:</span>
+                            <p class="text-slate-600 text-xs mt-1">Menggambarkan hubungan antarmanusia yang saling bersatu & menolong.</p>
+                        </div>
+                        <div class="bg-green-50 p-3 rounded-xl border border-green-200">
+                            <span class="font-bold text-green-800">🌳 Pohon Beringin:</span>
+                            <p class="text-slate-600 text-xs mt-1">Menggambarkan persatuan dan tempat berteduh/berlindung bersama.</p>
+                        </div>
+                        <div class="bg-purple-50 p-3 rounded-xl border border-purple-200">
+                            <span class="font-bold text-purple-800">🐂 Kepala Banteng:</span>
+                            <p class="text-slate-600 text-xs mt-1">Menggambarkan musyawarah dan suka berkumpul mengambil keputusan.</p>
+                        </div>
+                        <div class="bg-blue-50 p-3 rounded-xl border border-blue-200 col-span-1 sm:col-span-2">
+                            <span class="font-bold text-blue-800">🌾 Padi dan Kapas:</span>
+                            <p class="text-slate-600 text-xs mt-1">Menggambarkan kemakmuran, pangan (makanan), sandang (pakaian), dan keadilan sosial.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SUB LESSON D -->
+                <div id="content-b2-d" class="sublesson-b2 hidden space-y-3">
+                    <h3 class="font-bold text-slate-800 text-base">🏡 Penerapan Nilai Pancasila di Rumah:</h3>
+
+                    <div class="space-y-2 text-xs sm:text-sm">
+                        <div class="p-3 bg-amber-50 rounded-xl border border-amber-200">
+                            <strong class="text-amber-800">Sila 1 (Ketuhanan):</strong> Beribadah tepat waktu, berdoa sebelum makan, bersyukur.
+                        </div>
+                        <div class="p-3 bg-red-50 rounded-xl border border-red-200">
+                            <strong class="text-red-800">Sila 2 (Kemanusiaan):</strong> Menyayangi adik/kakak, membantu orang tua, sopan santun.
+                        </div>
+                        <div class="p-3 bg-green-50 rounded-xl border border-green-200">
+                            <strong class="text-green-800">Sila 3 (Persatuan):</strong> Menjaga kerukunan keluarga, tidak bertengkar dengan saudara.
+                        </div>
+                        <div class="p-3 bg-purple-50 rounded-xl border border-purple-200">
+                            <strong class="text-purple-800">Sila 4 (Musyawarah):</strong> Berdiskusi menentukan tujuan liburan keluarga, tidak memaksakan kehendak.
+                        </div>
+                        <div class="p-3 bg-blue-50 rounded-xl border border-blue-200">
+                            <strong class="text-blue-800">Sila 5 (Keadilan):</strong> Adil membagi kue dengan adik, hemat dan tidak boros.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SUB LESSON E -->
+                <div id="content-b2-e" class="sublesson-b2 hidden space-y-3">
+                    <h3 class="font-bold text-slate-800 text-base">👨‍💼 Tokoh-Tokoh Perumus Pancasila:</h3>
+                    <p class="text-xs text-slate-600 mb-2">Tokoh pendiri bangsa yang merumuskan Pancasila dalam sidang BPUPKI:</p>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-center text-xs">
+                        <div class="p-3 bg-slate-50 border rounded-xl font-bold text-slate-800">🇮🇩 Ir. Soekarno</div>
+                        <div class="p-3 bg-slate-50 border rounded-xl font-bold text-slate-800">🇮🇩 Drs. Moh. Hatta</div>
+                        <div class="p-3 bg-slate-50 border rounded-xl font-bold text-slate-800">🇮🇩 Mr. Moh. Yamin</div>
+                        <div class="p-3 bg-slate-50 border rounded-xl font-bold text-slate-800">🇮🇩 Mr. Soepomo</div>
+                        <div class="p-3 bg-slate-50 border rounded-xl font-bold text-slate-800">🇮🇩 Mr. A. Subardjo</div>
+                        <div class="p-3 bg-slate-50 border rounded-xl font-bold text-slate-800">🇮🇩 Mr. A.A. Maramis</div>
+                    </div>
+                </div>
+
+                <!-- SUB LESSON F -->
+                <div id="content-b2-f" class="sublesson-b2 hidden space-y-3">
+                    <h3 class="font-bold text-slate-800 text-base">🎖️ Sikap Meneladani Pahlawan:</h3>
+                    <div class="bg-amber-50 p-4 rounded-2xl border border-amber-300 space-y-2 text-xs sm:text-sm text-slate-700">
+                        <p>💪 <strong>Berani & Pantang Menyerah:</strong> Rajin belajar walaupun ada pelajaran yang sulit.</p>
+                        <p>🤝 <strong>Kerja Sama:</strong> Gotong royong membersihkan rumah bersama keluarga.</p>
+                        <p>🇲🇨 <strong>Cinta Tanah Air:</strong> Mengikuti upacara bendera dengan tertib dan khidmat.</p>
+                    </div>
+                </div>
+
+                <!-- Footer Navigation Buttons -->
+                <div class="mt-8 pt-4 border-t-2 border-slate-100 flex flex-wrap gap-3 justify-between">
+                    <button onclick="goToStageMap()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-4 py-2.5 rounded-xl text-sm">
+                        🗺️ Peta Petualangan
+                    </button>
+                    <div class="flex gap-2">
+                        <button onclick="startLesson(2)" class="bg-amber-100 hover:bg-amber-200 text-amber-800 font-bold px-4 py-2.5 rounded-xl text-sm">
+                            📖 ULANGI MATERI
+                        </button>
+                        <button onclick="startQuiz(2)" class="bg-red-500 hover:bg-red-600 text-white font-bold px-5 py-2.5 rounded-xl text-sm border-2 border-red-700 card-shadow-sm btn-bounce">
+                            📝 MULAI KUIS BAB 2
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 6. HALAMAN KUIS / QUIZ SCREEN -->
+        <!-- ========================================== -->
+        <section id="screen-quiz" class="screen hidden">
+            <div class="bg-white rounded-3xl p-5 sm:p-8 border-4 border-amber-300 card-shadow max-w-3xl mx-auto">
+                <!-- Quiz Header -->
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <span id="quiz-bab-badge" class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full">
+                            KUIS BAB 1
+                        </span>
+                        <h3 id="quiz-progress-text" class="text-sm font-bold text-slate-500 mt-1">Soal 1 dari 50</h3>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xs font-bold text-slate-400 block">TOTAL POIN</span>
+                        <span id="quiz-score-display" class="text-2xl font-black text-amber-600">0</span>
+                    </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="w-full bg-slate-100 h-4 rounded-full overflow-hidden border border-slate-200 mb-6">
+                    <div id="quiz-progress-bar" class="bg-gradient-to-r from-amber-400 to-green-500 h-full w-0 transition-all duration-300"></div>
+                </div>
+
+                <!-- Question Card -->
+                <div class="bg-amber-50 p-5 rounded-2xl border-2 border-amber-200 mb-6 relative">
+                    <p id="question-text" class="text-base sm:text-xl font-bold text-slate-800 leading-snug">
+                        Loading soal...
+                    </p>
+                </div>
+
+                <!-- Options Grid -->
+                <div id="options-container" class="grid grid-cols-1 gap-3 mb-6">
+                    <!-- Options injected dynamically via JavaScript -->
+                </div>
+
+                <!-- Answer Feedback Box (Initially Hidden) -->
+                <div id="feedback-box" class="hidden p-4 rounded-2xl mb-6 transition-all duration-200">
+                    <div id="feedback-status" class="font-black text-xl mb-1 flex items-center gap-2"></div>
+                    <p id="feedback-explanation" class="text-sm text-slate-700 font-medium leading-relaxed"></p>
+                </div>
+
+                <!-- Next Question Button -->
+                <button id="btn-next-question" onclick="nextQuestion()" class="hidden w-full bg-blue-500 hover:bg-blue-600 text-white font-black text-lg py-3.5 rounded-2xl card-shadow btn-bounce border-2 border-blue-700 items-center justify-center gap-2">
+                    SOAL BERIKUTNYA ➡
+                </button>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 7. HALAMAN HASIL AKHIR -->
+        <!-- ========================================== -->
+        <section id="screen-result" class="screen hidden text-center">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border-4 border-amber-300 card-shadow max-w-2xl mx-auto">
+                <span class="text-6xl block mb-2">🎉</span>
+                <h2 class="text-3xl font-black text-slate-800 mb-1">GAME SELESAI!</h2>
+                <p class="text-slate-600 font-medium text-sm mb-6">Hebat, <span class="player-name-text text-amber-600 font-bold">Pemain</span>!</p>
+
+                <!-- Score Big Display -->
+                <div class="bg-gradient-to-b from-amber-50 to-orange-50 border-4 border-amber-300 p-6 rounded-3xl mb-6 card-shadow-sm inline-block w-full">
+                    <span class="text-xs font-bold uppercase tracking-wider text-amber-700">SKOR AKHIR KAMU</span>
+                    <div class="text-5xl sm:text-6xl font-black text-amber-600 my-2">
+                        <span id="final-score">0</span> <span class="text-2xl text-slate-400 font-bold">/ 1000</span>
+                    </div>
+                    
+                    <div class="grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-amber-200 text-xs sm:text-sm font-bold">
+                        <div class="text-green-600 bg-white p-2 rounded-xl border">
+                            ✓ Benar: <span id="final-correct">0</span>
+                        </div>
+                        <div class="text-red-500 bg-white p-2 rounded-xl border">
+                            ✗ Salah: <span id="final-wrong">0</span>
+                        </div>
+                        <div class="text-blue-600 bg-white p-2 rounded-xl border">
+                            📊 Nilai: <span id="final-percentage">0%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category Badge -->
+                <div id="result-category-box" class="p-4 rounded-2xl border-2 mb-6">
+                    <h3 id="result-category-title" class="text-2xl font-black mb-1">LUAR BIASA!</h3>
+                    <p id="result-category-desc" class="text-sm font-medium">Kamu sangat baik dalam belajar Pendidikan Pancasila.</p>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="space-y-3">
+                    <button onclick="showCertificate()" class="w-full bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-900 font-black text-xl py-4 rounded-2xl card-shadow btn-bounce border-2 border-amber-600 flex items-center justify-center gap-3">
+                        🏆 LIHAT SERTIFIKAT
+                    </button>
+                    
+                    <button onclick="resetGame()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-base py-3 rounded-xl border-2 border-slate-300 flex items-center justify-center gap-2">
+                        🔄 ULANGI GAME
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 8. HALAMAN SERTIFIKAT DIGITAL -->
+        <!-- ========================================== -->
+        <section id="screen-certificate" class="screen hidden">
+            <div class="max-w-3xl mx-auto">
+                <!-- Certificate Card -->
+                <div id="certificate-print-area" class="bg-amber-50 rounded-3xl p-6 sm:p-10 border-8 border-amber-400 shadow-2xl relative overflow-hidden text-center">
+                    <!-- Ornamental Corners -->
+                    <div class="absolute top-3 left-3 text-2xl text-amber-500">⚜️</div>
+                    <div class="absolute top-3 right-3 text-2xl text-amber-500">⚜️</div>
+                    <div class="absolute bottom-3 left-3 text-2xl text-amber-500">⚜️</div>
+                    <div class="absolute bottom-3 right-3 text-2xl text-amber-500">⚜️</div>
+
+                    <div class="bg-white p-6 sm:p-8 rounded-2xl border-2 border-amber-300 shadow-inner">
+                        <span class="text-4xl block mb-2">🇮🇩</span>
+                        <h2 class="text-2xl sm:text-4xl font-black text-slate-800 tracking-wide uppercase">SERTIFIKAT PENGHARGAAN</h2>
+                        <p class="text-xs sm:text-sm font-bold text-amber-600 tracking-widest mt-1">GAME PETUALANGAN PANCASILA</p>
+
+                        <p class="text-slate-500 text-xs sm:text-sm mt-6">Diberikan kepada:</p>
+                        <h3 id="cert-name" class="text-2xl sm:text-4xl font-black text-amber-700 underline my-2">NAMA PEMAIN</h3>
+                        
+                        <p class="text-slate-600 text-xs sm:text-sm max-w-md mx-auto leading-relaxed">
+                            atas keberhasilannya menyelesaikan seluruh petualangan dan kuis dengan hasil yang sangat membanggakan dalam mata pelajaran:
+                        </p>
+                        
+                        <div class="inline-block bg-red-100 text-red-700 px-4 py-1.5 rounded-full font-bold text-sm my-3 border border-red-300">
+                            Pendidikan Pancasila Kelas 2A
+                        </div>
+
+                        <!-- Score info in certificate -->
+                        <div class="flex justify-center gap-6 my-4 bg-amber-50 p-3 rounded-xl border border-amber-200 max-w-xs mx-auto">
+                            <div>
+                                <span class="text-[10px] text-slate-400 font-bold block">SKOR AKHIR</span>
+                                <span id="cert-score" class="font-extrabold text-amber-600 text-lg">1000 / 1000</span>
+                            </div>
+                            <div class="border-l border-amber-200 pl-6">
+                                <span class="text-[10px] text-slate-400 font-bold block">JAWABAN BENAR</span>
+                                <span id="cert-correct" class="font-extrabold text-green-600 text-lg">50 dari 50</span>
+                            </div>
+                        </div>
+
+                        <p class="text-xs text-slate-400">Tanggal Penyelesaian: <span id="cert-date" class="font-bold text-slate-600">29 September 2026</span></p>
+
+                        <!-- Footer Signatures & Dev Info -->
+                        <div class="mt-8 pt-4 border-t border-slate-200 flex justify-between items-end text-left">
+                            <div class="text-[11px] text-slate-500">
+                                <p class="font-bold text-slate-700">Pengembang:</p>
+                                <p class="font-semibold text-amber-600">GIGA INOVATION</p>
+                                <p>081329200985</p>
+                            </div>
+                            <div class="text-center">
+                                <span class="text-3xl block">🏆</span>
+                                <span class="text-[10px] font-bold text-amber-600 uppercase">Anak Hebat Pancasila</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Print / Action Controls -->
+                <div class="mt-6 flex flex-wrap gap-3 justify-center">
+                    <button onclick="window.print()" class="bg-blue-500 hover:bg-blue-600 text-white font-bold px-6 py-3 rounded-xl card-shadow btn-bounce flex items-center gap-2">
+                        🖨️ Cetak / Simpan Sertifikat
+                    </button>
+                    <button onclick="resetGame()" class="bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold px-6 py-3 rounded-xl card-shadow btn-bounce flex items-center gap-2">
+                        🔄 Main Lagi
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Simple Footer -->
+    <footer class="bg-white border-t border-slate-200 py-3 text-center text-xs text-slate-400 font-medium">
+        <p>Petualangan Pancasila SD/MI Kelas 2A &bull; Designed for Interactive Learning</p>
+    </footer>
+
+    <script>
+        // APP STATE
+        let playerName = "";
+        let currentStage = 1;
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let correctCount = 0;
+        let wrongCount = 0;
+        let userAnswers = [];
+        let hasLearnedBab1 = false;
+        let hasLearnedBab2 = false;
+
+        // EXACTLY 50 UNIQUE QUESTIONS (25 Bab 1, 25 Bab 2)
+        const quizQuestions = [
+            // ==================== BAB 1 (SOAL 1 - 25) ====================
+            {
+                bab: 1,
+                id: 1,
+                question: "Sesuatu yang harus kita lakukan di rumah agar kehidupan menjadi tertib dinamakan...",
+                options: ["A. Permainan", "B. Aturan", "B. Hadiah", "D. Hukuman"],
+                correct: 1,
+                explanation: "Aturan adalah petunjuk atau tindakan yang harus dipatuhi agar rumah menjadi tertib dan damai."
+            },
+            {
+                bab: 1,
+                id: 2,
+                question: "Salah satu contoh aturan di rumah pada pagi hari adalah...",
+                options: ["A. Bermain sampai malam", "B. Merapikan tempat tidur", "C. Menonton TV seharian", "D. Tidur kembali"],
+                correct: 1,
+                explanation: "Merapikan tempat tidur setelah bangun pagi adalah contoh aturan baik di rumah."
+            },
+            {
+                bab: 1,
+                id: 3,
+                question: "Sebelum makan bersama keluarga, aturan yang wajib kita lakukan adalah...",
+                options: ["A. Langsung menghabiskan makanan", "B. Mencuci tangan dan berdoa", "C. Berbicara keras-keras", "D. Bermain HP"],
+                correct: 1,
+                explanation: "Mencuci tangan dan berdoa sebelum makan menjaga kebersihan dan wujud syukur."
+            },
+            {
+                bab: 1,
+                id: 4,
+                question: "Manfaat jika semua anggota keluarga mematuhi aturan rumah adalah...",
+                options: ["A. Rumah menjadi kotor", "B. Suasana rumah menjadi rukun dan nyaman", "C. Sering bertengkar", "D. Orang tua menjadi marah"],
+                correct: 1,
+                explanation: "Mematuhi aturan menciptakan suasana rumah yang nyaman, damai, dan rukun."
+            },
+            {
+                bab: 1,
+                id: 5,
+                question: "Setelah selesai bermain, hal yang harus kita lakukan terhadap mainan adalah...",
+                options: ["A. Membiarkannya berserakan", "B. Menyuruh ibu merapikan", "C. Merapikannya kembali ke tempatnya", "D. Melemparnya ke luar rumah"],
+                correct: 2,
+                explanation: "Bertanggung jawab merapikan mainan sendiri merupakan bentuk mematuhi aturan rumah."
+            },
+            {
+                bab: 1,
+                id: 6,
+                question: "Jika hendak pergi bermain ke rumah teman, sikap anak yang patuh aturan adalah...",
+                options: ["A. Langsung pergi begitu saja", "B. Meminta izin kepada orang tua", "C. Menangis terlebih dahulu", "D. Bersembunyi"],
+                correct: 1,
+                explanation: "Meminta izin orang tua sebelum bepergian penting agar orang tua tidak khawatir."
+            },
+            {
+                bab: 1,
+                id: 7,
+                question: "Anak yang patuh aturan di rumah akan disayangi oleh...",
+                options: ["A. Orang tua dan saudara", "B. Musuh", "C. Orang asing", "D. Tidak ada"],
+                correct: 0,
+                explanation: "Anak yang rajin dan patuh aturan pasti disayangi oleh ayah, ibu, dan seluruh anggota keluarga."
+            },
+            {
+                bab: 1,
+                id: 8,
+                question: "Akibat dari tidak mematuhi aturan menjaga kebersihan rumah adalah...",
+                options: ["A. Rumah menjadi rapi", "B. Rumah menjadi kotor dan menjadi sarang penyakit", "C. Rumah menjadi luas", "D. Mendapat pujian"],
+                correct: 1,
+                explanation: "Jika tidak menjaga kebersihan, rumah menjadi kotor dan bisa mendatangkan penyakit."
+            },
+            {
+                bab: 1,
+                id: 9,
+                question: "Sikap saat berbicara kepada orang tua di rumah harus...",
+                options: ["A. Membentak dan berteriak", "B. Sopan dan santun", "C. Acuh tak acuh", "D. Sambil marah"],
+                correct: 1,
+                explanation: "Berbicara kepada orang tua harus dengan bahasa yang sopan, santun, dan lembut."
+            },
+            {
+                bab: 1,
+                id: 10,
+                question: "Gaga anak yang disiplin. Gaga belajar setiap malam sesuai...",
+                options: ["A. Keinginan main", "B. Jadwal belajar", "C. Acara TV", "D. Perintah teman"],
+                correct: 1,
+                explanation: "Anak yang disiplin selalu belajar secara teratur sesuai jadwal belajar yang disepakati."
+            },
+            {
+                bab: 1,
+                id: 11,
+                question: "Merapikan meja belajar setelah digunakan adalah bentuk sikap...",
+                options: ["A. Malas", "B. Tanggung jawab", "C. Curang", "D. Sombong"],
+                correct: 1,
+                explanation: "Merapikan kembali barang yang telah digunakan adalah cerminan rasa tanggung jawab."
+            },
+            {
+                bab: 1,
+                id: 12,
+                question: "Contoh aturan penggunaan barang milik anggota keluarga di rumah adalah...",
+                options: ["A. Mengambil tanpa memberi tahu", "B. Meminta izin sebelum meminjamnya", "C. Merusaknya saat dipakai", "D. Menyembunyikannya"],
+                correct: 1,
+                explanation: "Kita harus meminta izin terlebih dahulu jika ingin meminjam barang milik orang lain."
+            },
+            {
+                bab: 1,
+                id: 13,
+                question: "Bangun tidur terlalu siang membuat kita menjadi...",
+                options: ["A. Sehat dan bugar", "B. Terlambat ke sekolah", "C. Pintar", "D. Cepat kaya"],
+                correct: 1,
+                explanation: "Bangun terlambat bisa menyebabkan kita terburu-buru dan terlambat sampai di sekolah."
+            },
+            {
+                bab: 1,
+                id: 14,
+                question: "Mengapa setiap keluarga memerlukan aturan di rumah?",
+                options: ["A. Supaya anak-anak merasa takut", "B. Agar hidup di rumah menjadi tertib dan teratur", "C. Agar bisa menghukum anak", "D. Supaya rumah cepat dijual"],
+                correct: 1,
+                explanation: "Aturan dibuat agar seluruh anggota keluarga hidup tertib, teratur, dan aman."
+            },
+            {
+                bab: 1,
+                id: 15,
+                question: "Ketika melihat ibu sedang repot membersihkan rumah, sikap kita sebaiknya...",
+                options: ["A. Pura-pura tidak tahu", "B. Mengorotkan rumah", "C. Membantu ibu sesuai kemampuan kita", "D. Bermain HP di depan ibu"],
+                correct: 2,
+                explanation: "Membantu orang tua merapikan rumah adalah bentuk anak yang patuh dan berbakti."
+            },
+            {
+                bab: 1,
+                id: 16,
+                question: "Contoh aturan saat menggunakan gawai (HP/tablet) di rumah adalah...",
+                options: ["A. Main HP seharian penuh tanpa berhenti", "B. Membatasi waktu penggunaan sesuai kesepakatan orang tua", "C. Main HP saat makan malam", "D. Main HP di kegelapan"],
+                correct: 1,
+                explanation: "Menggunakan HP harus dibatasi waktunya agar tidak mengganggu kesehatan mata dan belajar."
+            },
+            {
+                bab: 1,
+                id: 17,
+                question: "Siapa saja yang wajib mematuhi aturan di rumah?",
+                options: ["A. Anak saja", "B. Ayah saja", "C. Ibu saja", "D. Seluruh anggota keluarga"],
+                correct: 3,
+                explanation: "Aturan rumah dibuat untuk dipatuhi oleh seluruh anggota keluarga."
+            },
+            {
+                bab: 1,
+                id: 18,
+                question: "Sikap yang ditunjukkan oleh anak yang mematuhi aturan jam tidur malam adalah...",
+                options: ["A. Tidur tepat waktu tidak terlalu larut malam", "B. Begadang menonton televisi", "C. Bermain game sampai subuh", "D. Menangis tidak mau tidur"],
+                correct: 0,
+                explanation: "Tidur tepat waktu menjaga kesehatan tubuh dan membuat bangun pagi terasa segar."
+            },
+            {
+                bab: 1,
+                id: 19,
+                question: "Apa yang harus kita lakukan pada pakaian kotor setelah dipakai?",
+                options: ["A. Melempar di atas tempat tidur", "B. Meletakkannya di keranjang baju kotor", "C. Menggantungnya di pintu", "D. Membiarkannya di lantai"],
+                correct: 1,
+                explanation: "Pakaian kotor harus ditaruh di keranjang baju kotor agar kamar tetap rapi dan bersih."
+            },
+            {
+                bab: 1,
+                id: 20,
+                question: "Dalam cerita 'Gaga Anak Disiplin', apa yang dilakukan Gaga tepat setelah bangun tidur?",
+                options: ["A. Mencari mainan", "B. Merapikan tempat tidurnya", "C. Meminta uang jajan", "D. Menonton kartun"],
+                correct: 1,
+                explanation: "Gaga langsung merapikan tempat tidurnya sendiri setelah bangun pagi."
+            },
+            {
+                bab: 1,
+                id: 21,
+                question: "Apabila kita mematuhi aturan berpamitan, orang tua kita akan merasa...",
+                options: ["A. Tenang dan tidak cemas", "B. Marah besar", "C. Sedih", "D. Bingung"],
+                correct: 0,
+                explanation: "Dengan berpamitan, orang tua tahu keberadaan kita dan merasa tenang."
+            },
+            {
+                bab: 1,
+                id: 22,
+                question: "Di bawah ini yang BUKAN merupakan contoh aturan di rumah adalah...",
+                options: ["A. Mengucapkan salam saat masuk rumah", "B. Membuang sampah pada tempatnya", "C. Mengikuti upacara bendera hari Senin", "D. Menjaga ketenangan saat keluarga beristirahat"],
+                correct: 2,
+                explanation: "Upacara bendera adalah aturan di sekolah, bukan aturan di rumah."
+            },
+            {
+                bab: 1,
+                id: 23,
+                question: "Mematikan keran air setelah selesai digunakan termasuk aturan menjaga...",
+                options: ["A. Kebersihan", "B. Penghematan energi dan air", "C. Keamanan pintu", "D. Kerapian sepatu"],
+                correct: 1,
+                explanation: "Mematikan air yang tidak dipakai adalah bentuk hemat air di rumah."
+            },
+            {
+                bab: 1,
+                id: 24,
+                question: "Anak yang jujur jika membuat kesalahan melanggar aturan akan...",
+                options: ["A. Menyalahkan adik", "B. Mengakui kesalahan dan meminta maaf", "C. Lari bersembunyi", "D. Pura-pura pingsan"],
+                correct: 1,
+                explanation: "Mengakui kesalahan dan meminta maaf adalah sikap anak patuh dan jujur."
+            },
+            {
+                bab: 1,
+                id: 25,
+                question: "Menjaga kerapian rak sepatu di teras rumah membuat rumah terlihat...",
+                options: ["A. Rapi dan indah dipandang", "B. Berantakan", "C. Sempit", "D. Kumal"],
+                correct: 0,
+                explanation: "Menaruh sepatu dengan rapi membuat rumah menjadi bersih dan indah."
+            },
+
+            // ==================== BAB 2 (SOAL 26 - 50) ====================
+            {
+                bab: 2,
+                id: 26,
+                question: "Lambang Negara Republik Indonesia adalah...",
+                options: ["A. Pohon Beringin", "B. Garuda Pancasila", "C. Bendera Merah Putih", "D. Lagu Indonesia Raya"],
+                correct: 1,
+                explanation: "Garuda Pancasila adalah lambang negara kita Indonesia."
+            },
+            {
+                bab: 2,
+                id: 27,
+                question: "Simbol Bintang 🌟 merupakan lambang dari Pancasila sila ke-...",
+                options: ["A. Satu", "B. Dua", "C. Tiga", "D. Empat"],
+                correct: 0,
+                explanation: "Bintang emas adalah lambang sila pertama: Ketuhanan Yang Maha Esa."
+            },
+            {
+                bab: 2,
+                id: 28,
+                question: "Bunyi dari sila kedua Pancasila adalah...",
+                options: ["A. Ketuhanan Yang Maha Esa", "B. Kemanusiaan yang adil dan beradab", "C. Persatuan Indonesia", "D. Keadilan sosial"],
+                correct: 1,
+                explanation: "Sila ke-2 berbunyi: Kemanusiaan yang adil dan beradab."
+            },
+            {
+                bab: 2,
+                id: 29,
+                question: "Simbol Rantai ⛓️ melambangkan sila Pancasila yang mengajarkan kita untuk...",
+                options: ["A. Beribadah", "B. Saling menyayangi dan menolong sesama manusia", "C. Bermusyawarah", "D. Berkelahi"],
+                correct: 1,
+                explanation: "Rantai melambangkan hubungan antarmanusia yang bersatu dan saling menolong."
+            },
+            {
+                bab: 2,
+                id: 30,
+                question: "Pohon Beringin 🌳 merupakan lambang dari sila ke-3 yang berbunyi...",
+                options: ["A. Persatuan Indonesia", "B. Keadilan Sosial", "C. Ketuhanan Yang Maha Esa", "D. Kerakyatan"],
+                correct: 0,
+                explanation: "Pohon Beringin melambangkan sila ketiga: Persatuan Indonesia."
+            },
+            {
+                bab: 2,
+                id: 31,
+                question: "Simbol Kepala Banteng 🐂 merupakan lambang dari sila ke-...",
+                options: ["A. 2", "B. 3", "C. 4", "D. 5"],
+                correct: 2,
+                explanation: "Kepala Banteng melambangkan sila keempat Pancasila."
+            },
+            {
+                bab: 2,
+                id: 32,
+                question: "Padi dan Kapas 🌾 melambangkan kebutuhan dasar manusia yaitu...",
+                options: ["A. Pangan (makanan) dan Sandang (pakaian)", "B. Perhiasan dan Uang", "C. Mobil dan Rumah", "D. Mainan dan HP"],
+                correct: 0,
+                explanation: "Padi melambangkan pangan (makanan) dan Kapas melambangkan sandang (pakaian)."
+            },
+            {
+                bab: 2,
+                id: 33,
+                question: "Mengembangkan sikap rajin berdoa dan beribadah di rumah sesuai dengan Pancasila sila ke-...",
+                options: ["A. 1", "B. 2", "C. 3", "D. 4"],
+                correct: 0,
+                explanation: "Beribadah dan berdoa adalah wujud penerapan Sila Ke-1 (Ketuhanan)."
+            },
+            {
+                bab: 2,
+                id: 34,
+                question: "Menjaga kerukunan dan tidak bertengkar dengan adik di rumah adalah contoh penerapan sila ke-...",
+                options: ["A. Pertama", "B. Kedua", "C. Ketiga", "D. Kelima"],
+                correct: 2,
+                explanation: "Kerukunan memperkuat Persatuan Indonesia (Sila ke-3)."
+            },
+            {
+                bab: 2,
+                id: 35,
+                question: "Musyawarah bersama keluarga untuk menentukan tujuan liburan adalah contoh pengamalan sila ke-...",
+                options: ["A. 1", "B. 2", "C. 3", "D. 4"],
+                correct: 3,
+                explanation: "Bermusyawarah mengambil keputusan bersama adalah contoh Sila ke-4."
+            },
+            {
+                bab: 2,
+                id: 36,
+                question: "Sikap adil dalam membagi makanan kepada saudara di rumah sesuai nilai sila ke-...",
+                options: ["A. 2", "B. 3", "C. 4", "D. 5"],
+                correct: 3,
+                explanation: "Bersikap adil kepada sesama anggota keluarga merupakan penerapan Sila ke-5."
+            },
+            {
+                bab: 2,
+                id: 37,
+                question: "Berikut ini yang BUKAN merupakan tokoh perumus Pancasila adalah...",
+                options: ["A. Ir. Soekarno", "B. Drs. Moh. Hatta", "C. Mr. Moh. Yamin", "D. Pangeran Antasari"],
+                correct: 3,
+                explanation: "Ir. Soekarno, Moh. Hatta, dan Moh. Yamin adalah perumus Pancasila."
+            },
+            {
+                bab: 2,
+                id: 38,
+                question: "Tokoh yang menyampaikan usulan dasar negara pada tanggal 1 Juni 1945 adalah...",
+                options: ["A. Ir. Soekarno", "B. Ki Hajar Dewantara", "C. Jenderal Soedirman", "D. Bung Tomo"],
+                correct: 0,
+                explanation: "Ir. Soekarno menyampaikan pidato dasar negara Pancasila pada 1 Juni 1945."
+            },
+            {
+                bab: 2,
+                id: 39,
+                question: "Sikap para pahlawan yang wajib kita teladani sebagai seorang siswa adalah...",
+                options: ["A. Mementingkan diri sendiri", "B. Pantang menyerah dan rajin belajar", "C. Suka berkelahi", "D. Malas bersekolah"],
+                correct: 1,
+                explanation: "Siswa dapat meneladani pahlawan dengan sikap pantang menyerah dan rajin belajar."
+            },
+            {
+                bab: 2,
+                id: 40,
+                question: "Menghormati anggota keluarga yang sedang beribadah merupakan pengamalan sila...",
+                options: ["A. Ketuhanan Yang Maha Esa", "B. Persatuan Indonesia", "C. Keadilan sosial", "D. Kerakyatan"],
+                correct: 0,
+                explanation: "Saling menghormati ibadah adalah cerminan sila pertama."
+            },
+            {
+                bab: 2,
+                id: 41,
+                question: "Menolong ibu merawat adik yang sedang sakit adalah bentuk perilaku...",
+                options: ["A. Sila ke-1", "B. Sila ke-2 (Kemanusiaan)", "C. Sila ke-4", "D. Sila ke-5"],
+                correct: 1,
+                explanation: "Menolong dan menyayangi sesama anggota keluarga adalah wujud sila ke-2."
+            },
+            {
+                bab: 2,
+                id: 42,
+                question: "Mendengarkan pendapat orang tua saat berdiskusi di rumah berarti kita menghargai sila ke-...",
+                options: ["A. 1", "B. 2", "C. 3", "D. 4"],
+                correct: 3,
+                explanation: "Menghargai pendapat orang lain saat berdiskusi adalah ciri sila ke-4."
+            },
+            {
+                bab: 2,
+                id: 43,
+                question: "Jumlah sila dalam Pancasila ada...",
+                options: ["A. Tiga", "B. Empat", "C. Lima", "D. Enam"],
+                correct: 2,
+                explanation: "Pancasila terdiri dari 5 sila (Panca = lima, Sila = dasar)."
+            },
+            {
+                bab: 2,
+                id: 44,
+                question: "Makna dari Pohon Beringin yang rindang adalah...",
+                options: ["A. Tempat menanam buah", "B. Tempat berteduh dan perlindungan seluruh rakyat", "C. Tempat bersembunyi", "D. Tempat bermain layangan"],
+                correct: 1,
+                explanation: "Pohon beringin rindang melambangkan tempat berteduh dan bersatu seluruh rakyat."
+            },
+            {
+                bab: 2,
+                id: 45,
+                question: "Bentuk perwujudan cinta tanah air bagi seorang pelajar SD adalah...",
+                options: ["A. Rajin belajar dan menjaga kebersihan lingkungan", "B. Bermain game seharian", "C. Membuang sampah di sungai", "D. Tidur di kelas"],
+                correct: 0,
+                explanation: "Rajin belajar merupakan cara siswa mengisi kemerdekaan dan mencintai tanah air."
+            },
+            {
+                bab: 2,
+                id: 46,
+                question: "Banteng suka berkumpul, hal ini menggambarkan manusia Indonesia yang suka...",
+                options: ["A. Bermusyawarah dan berdiskusi bersama", "B. Bertengkar", "C. Menyendiri", "D. Marah-marah"],
+                correct: 0,
+                explanation: "Banteng suka berkumpul, artinya rakyat Indonesia suka bermusyawarah mufakat."
+            },
+            {
+                bab: 2,
+                id: 47,
+                question: "Sikap tidak memaksakan kehendak kita kepada adik atau kakak merupakan nilai dari sila ke-...",
+                options: ["A. 1", "B. 2", "C. 3", "D. 4"],
+                correct: 3,
+                explanation: "Tidak memaksakan kehendak adalah bagian dari nilai-nilai musyawarah Sila ke-4."
+            },
+            {
+                bab: 2,
+                id: 48,
+                question: "Menggunakan produk buatan dalam negeri (Indonesia) merupakan contoh sikap sesuai sila ke-...",
+                options: ["A. Pertama", "B. Kedua", "C. Ketiga", "D. Keempat"],
+                correct: 2,
+                explanation: "Mencintai barang buatan Indonesia adalah perwujudan Persatuan Indonesia (Sila ke-3)."
+            },
+            {
+                bab: 2,
+                id: 49,
+                question: "Apa yang dimaksud dengan sikap rela berkorban pahlawan?",
+                options: ["A. Meminta imbalan uang", "B. Bersedia memberikan waktu dan tenaga demi kebaikan bersama", "C. Malas berjuang", "D. Bersembunyi dari bahaya"],
+                correct: 1,
+                explanation: "Rela berkorban berarti ikhlas memberikan tenaga dan pikiran untuk kepentingan bersama."
+            },
+            {
+                bab: 2,
+                id: 50,
+                question: "Dasar Negara Republik Indonesia adalah...",
+                options: ["A. Pancasila", "B. UUD 1945", "C. Kebudayaan", "D. Bendera Merah Putih"],
+                correct: 0,
+                explanation: "Pancasila adalah dasar negara Republik Indonesia yang kita junjung tinggi."
+            }
+        ];
+
+        // VOICE SYNTHESIS (Bahasa Indonesia)
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel(); // cancel previous
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'id-ID';
+                utterance.rate = 0.9; // slightly slower for class 2 kids
+                utterance.pitch = 1.1; // friendly tone
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        // SCREEN NAVIGATION
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.add('hidden');
+            });
+            document.getElementById(screenId).classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // SUBMIT PLAYER NAME
+        function submitName() {
+            const nameInput = document.getElementById('input-name').value.trim();
+            const errorMsg = document.getElementById('name-error');
+
+            if (nameInput === "") {
+                errorMsg.classList.remove('hidden');
+                return;
+            }
+
+            errorMsg.classList.add('hidden');
+            playerName = nameInput;
+
+            // Update DOM text
+            document.querySelectorAll('.player-name-text').forEach(el => el.textContent = playerName);
+            document.getElementById('display-player-name').textContent = playerName;
+            document.getElementById('player-badge').classList.remove('hidden');
+
+            // Show greeting box
+            document.getElementById('greet-name').textContent = playerName;
+            document.getElementById('greeting-box').classList.remove('hidden');
+
+            // Speak greeting
+            speakText(`Halo ${playerName}! Selamat datang di Petualangan Pancasila! Mari belajar bersama!`);
+
+            // Change button action to proceed
+            const startBtn = document.getElementById('btn-start');
+            startBtn.innerHTML = "▶ LANJUTKAN PETUALANGAN";
+            startBtn.onclick = function() {
+                showScreen('screen-howto');
+                speakText("Bacalah cara bermain berikut ini.");
+            };
+        }
+
+        function goToStageMap() {
+            document.getElementById('map-score').textContent = score;
+            showScreen('screen-map');
+        }
+
+        // START LESSON
+        function startLesson(babNum) {
+            if (babNum === 1) {
+                hasLearnedBab1 = true;
+                showSubLesson('b1', 'a');
+                showScreen('screen-lesson-1');
+                speakText(`Halo ${playerName}, ayo kita pelajari Bab 1: Aku Patuh Aturan.`);
+            } else if (babNum === 2) {
+                hasLearnedBab2 = true;
+                showSubLesson('b2', 'a');
+                showScreen('screen-lesson-2');
+                speakText(`Luar biasa ${playerName}! Ayo kita pelajari Bab 2: Aku Berperilaku Pancasila.`);
+            }
+        }
+
+        // SUB LESSON SWITCHER
+        function showSubLesson(bab, sub) {
+            // Hide all sublessons for bab
+            document.querySelectorAll(`.sublesson-${bab}`).forEach(el => el.classList.add('hidden'));
+            document.getElementById(`content-${bab}-${sub}`).classList.remove('hidden');
+
+            // Update tab styles
+            document.querySelectorAll(`.tab-btn-${bab}`).forEach(btn => {
+                btn.className = `tab-btn-${bab} bg-slate-100 text-slate-600 font-bold px-3 py-1.5 rounded-xl text-xs sm:text-sm whitespace-nowrap`;
+            });
+
+            const activeTab = document.getElementById(`tab-${bab}-${sub}`);
+            if (activeTab) {
+                if (bab === 'b1') activeTab.className = "tab-btn-b1 bg-amber-500 text-white font-bold px-3 py-1.5 rounded-xl text-xs sm:text-sm whitespace-nowrap";
+                if (bab === 'b2') activeTab.className = "tab-btn-b2 bg-red-500 text-white font-bold px-3 py-1.5 rounded-xl text-xs sm:text-sm whitespace-nowrap";
+            }
+        }
+
+        // MINI INTERACTIVE ACTIVITY CHECKER
+        function checkMiniActivity(btn, isCorrect, feedback) {
+            const parent = btn.closest('div').parentElement;
+            const feedbackEl = parent.querySelector('.mini-feedback');
+            feedbackEl.classList.remove('hidden');
+
+            if (isCorrect) {
+                feedbackEl.className = "mini-feedback font-bold text-xs mt-2 text-green-600";
+                feedbackEl.textContent = "✓ " + feedback;
+                speakText(`Hebat ${playerName}! ` + feedback);
+            } else {
+                feedbackEl.className = "mini-feedback font-bold text-xs mt-2 text-amber-600";
+                feedbackEl.textContent = "💡 " + feedback;
+                speakText("Yuk coba pelajari lagi.");
+            }
+        }
+
+        // START QUIZ
+        function startQuiz(babNum) {
+            if (babNum === 1 && !hasLearnedBab1) {
+                alert(`Halo ${playerName}, pelajari materi Bab 1 terlebih dahulu ya sebelum mengikuti kuis!`);
+                startLesson(1);
+                return;
+            }
+            if (babNum === 2 && !hasLearnedBab2) {
+                alert(`Halo ${playerName}, pelajari materi Bab 2 terlebih dahulu ya sebelum mengikuti kuis!`);
+                startLesson(2);
+                return;
+            }
+
+            if (babNum === 1) {
+                currentQuestionIndex = 0; // Soal 1-25
+                document.getElementById('quiz-bab-badge').textContent = "KUIS BAB 1";
+            } else {
+                currentQuestionIndex = 25; // Soal 26-50
+                document.getElementById('quiz-bab-badge').textContent = "KUIS BAB 2";
+            }
+
+            showScreen('screen-quiz');
+            loadQuestion();
+        }
+
+        // LOAD QUESTION TO UI
+        function loadQuestion() {
+            const q = quizQuestions[currentQuestionIndex];
+            
+            // Update Progress Header
+            document.getElementById('quiz-progress-text').textContent = `Soal ${currentQuestionIndex + 1} dari 50`;
+            document.getElementById('quiz-score-display').textContent = score;
+
+            // Update Progress Bar %
+            const progressPercent = ((currentQuestionIndex + 1) / 50) * 100;
+            document.getElementById('quiz-progress-bar').style.width = `${progressPercent}%`;
+
+            // Set Question Text
+            document.getElementById('question-text').textContent = q.question;
+
+            // Options Container
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+
+            // Reset Feedback Box & Next Button
+            document.getElementById('feedback-box').className = 'hidden p-4 rounded-2xl mb-6 transition-all duration-200';
+            document.getElementById('btn-next-question').classList.add('hidden');
+
+            // Speak question text
+            speakText(`Soal nomor ${currentQuestionIndex + 1}. ${q.question}`);
+
+            // Render Options
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "option-btn w-full text-left bg-white hover:bg-amber-100 border-2 border-slate-200 hover:border-amber-400 p-4 rounded-2xl font-semibold text-sm sm:text-base text-slate-800 transition-all card-shadow-sm flex items-center justify-between";
+                btn.innerHTML = `<span>${opt}</span> <i class="fa-regular fa-circle text-slate-300"></i>`;
+                btn.onclick = () => selectAnswer(idx);
+                container.appendChild(btn);
+            });
+        }
+
+        // SELECT ANSWER & PROCESS FEEDBACK
+        function selectAnswer(selectedIndex) {
+            const q = quizQuestions[currentQuestionIndex];
+            const optionBtns = document.querySelectorAll('.option-btn');
+
+            // Disable all options
+            optionBtns.forEach(btn => btn.onclick = null);
+
+            const feedbackBox = document.getElementById('feedback-box');
+            const feedbackStatus = document.getElementById('feedback-status');
+            const feedbackExp = document.getElementById('feedback-explanation');
+            const nextBtn = document.getElementById('btn-next-question');
+
+            if (selectedIndex === q.correct) {
+                // CORRECT ANSWER
+                score += 20;
+                correctCount++;
+                document.getElementById('quiz-score-display').textContent = score;
+
+                // Option Styling
+                optionBtns[selectedIndex].className = "w-full text-left bg-green-100 border-3 border-green-500 p-4 rounded-2xl font-bold text-sm sm:text-base text-green-900 flex items-center justify-between";
+                optionBtns[selectedIndex].querySelector('i').className = "fa-solid fa-circle-check text-green-600 text-xl";
+
+                // Feedback Box
+                feedbackBox.className = "p-4 rounded-2xl mb-6 bg-green-100 border-2 border-green-400 text-green-900 block animate-bounce-once";
+                feedbackStatus.innerHTML = `✓ BENAR! <span class="text-xs bg-green-500 text-white px-2 py-0.5 rounded-full ml-auto">+20 POIN</span>`;
+                feedbackExp.textContent = `Hebat sekali, ${playerName}! ${q.explanation}`;
+
+                // Speak
+                speakText(`Benar, ${playerName}! Hebat sekali! ${q.explanation}`);
+
+                // Confetti burst for correct answer
+                confetti({
+                    particleCount: 25,
+                    spread: 60,
+                    origin: { y: 0.7 }
+                });
+
+            } else {
+                // INCORRECT ANSWER
+                wrongCount++;
+
+                // Selected Option Styling (Wrong)
+                optionBtns[selectedIndex].className = "w-full text-left bg-red-100 border-3 border-red-400 p-4 rounded-2xl font-bold text-sm sm:text-base text-red-900 flex items-center justify-between";
+                optionBtns[selectedIndex].querySelector('i').className = "fa-solid fa-circle-xmark text-red-500 text-xl";
+
+                // Show Correct Option
+                optionBtns[q.correct].className = "w-full text-left bg-green-50 border-2 border-green-400 p-4 rounded-2xl font-bold text-sm sm:text-base text-green-900 flex items-center justify-between";
+
+                // Feedback Box
+                feedbackBox.className = "p-4 rounded-2xl mb-6 bg-amber-100 border-2 border-amber-400 text-amber-900 block";
+                feedbackStatus.innerHTML = `✗ BELUM TEPAT`;
+                feedbackExp.textContent = `Yuk, pelajari jawabannya, ${playerName}. Jawaban yang benar adalah option ${q.options[q.correct]}. ${q.explanation}`;
+
+                // Speak
+                speakText(`Belum tepat, ${playerName}. Yuk, pelajari jawabannya.`);
+            }
+
+            // Show "SOAL BERIKUTNYA" button
+            nextBtn.classList.remove('hidden');
+            nextBtn.classList.add('flex');
+        }
+
+        // NEXT QUESTION
+        function nextQuestion() {
+            currentQuestionIndex++;
+
+            if (currentQuestionIndex === 25) {
+                // Completed Bab 1 Quiz
+                speakText(`Luar biasa ${playerName}! Kamu sudah menyelesaikan Kuis Bab 1! Ayo lanjut ke Bab 2.`);
+                showScreen('screen-lesson-2');
+                hasLearnedBab2 = true;
+            } else if (currentQuestionIndex >= 50) {
+                // Completed All 50 Questions
+                finishGame();
+            } else {
+                loadQuestion();
+            }
+        }
+
+        // FINISH GAME
+        function finishGame() {
+            showScreen('screen-result');
+
+            document.getElementById('final-score').textContent = score;
+            document.getElementById('final-correct').textContent = correctCount;
+            document.getElementById('final-wrong').textContent = wrongCount;
+
+            const percentage = Math.round((correctCount / 50) * 100);
+            document.getElementById('final-percentage').textContent = `${percentage}%`;
+
+            const catBox = document.getElementById('result-category-box');
+            const catTitle = document.getElementById('result-category-title');
+            const catDesc = document.getElementById('result-category-desc');
+
+            if (score >= 800) {
+                catBox.className = "p-4 rounded-2xl border-2 mb-6 bg-amber-100 border-amber-400 text-amber-900";
+                catTitle.textContent = "🌟 LUAR BIASA!";
+                catDesc.textContent = `Kamu sangat baik dalam belajar Pendidikan Pancasila. Hebat, ${playerName}!`;
+            } else if (score >= 600) {
+                catBox.className = "p-4 rounded-2xl border-2 mb-6 bg-blue-100 border-blue-400 text-blue-900";
+                catTitle.textContent = "⭐ HEBAT!";
+                catDesc.textContent = `Kamu sudah memahami banyak materi Pancasila. Terus berlatih ya, ${playerName}!`;
+            } else if (score >= 400) {
+                catBox.className = "p-4 rounded-2xl border-2 mb-6 bg-green-100 border-green-400 text-green-900";
+                catTitle.textContent = "💪 SEMANGAT!";
+                catDesc.textContent = `Kamu sudah belajar dengan baik. Yuk, terus berlatih lagi!`;
+            } else {
+                catBox.className = "p-4 rounded-2xl border-2 mb-6 bg-purple-100 border-purple-400 text-purple-900";
+                catTitle.textContent = "🌱 JANGAN MENYERAH!";
+                catDesc.textContent = `Belajar sedikit demi sedikit. Coba lagi dan kamu pasti bisa!`;
+            }
+
+            speakText(`Game Selesai! Selamat ${playerName}! Skor kamu adalah ${score} dari 1000.`);
+
+            // Grand Confetti Celebration
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }
+
+        // SHOW CERTIFICATE
+        function showCertificate() {
+            showScreen('screen-certificate');
+
+            document.getElementById('cert-name').textContent = playerName.toUpperCase();
+            document.getElementById('cert-score').textContent = `${score} / 1000`;
+            document.getElementById('cert-correct').textContent = `${correctCount} dari 50`;
+
+            // Automatic Today Date
+            const today = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('cert-date').textContent = today.toLocaleDateString('id-ID', options);
+
+            speakText(`Ini adalah Sertifikat Penghargaan kamu, ${playerName}! Selamat atas prestasi yang luar biasa!`);
+            
+            confetti({
+                particleCount: 80,
+                spread: 80,
+                origin: { y: 0.5 }
+            });
+        }
+
+        // RESET GAME
+        function resetGame() {
+            score = 0;
+            correctCount = 0;
+            wrongCount = 0;
+            currentQuestionIndex = 0;
+            hasLearnedBab1 = false;
+            hasLearnedBab2 = false;
+
+            showScreen('screen-home');
+            speakText("Mari kita mulai lagi petualangannya!");
+        }
+
+        // Initialize App on window load
+        window.onload = function() {
+            showScreen('screen-home');
+        };
+    </script>
+</body>
+</html>
